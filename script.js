@@ -45,7 +45,7 @@ function playGame() {
   if (confirm("New game?")) {
     for (let i = 0; i < 5; i++) {
       alert(`Round ${i + 1}`);
-      playRound(prompt("Do it"), getComputerChoice());
+      playRound(prompt("Do it").toLowerCase(), getComputerChoice());
     }
   }
 
