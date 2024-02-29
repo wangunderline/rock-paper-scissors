@@ -15,52 +15,82 @@ function getComputerChoice() {
 let userScore = 0;
 let computerScore = 0;
 
+const container = document.querySelector("#container");
+const buttons = document.querySelectorAll("button");
+
+let winner = document.createElement("p");
+let result = document.createElement("p");
+
+function resultText(message) {
+  result.textContent = message;
+  container.appendChild(result);
+}
+
+function text(message) {
+  winner.textContent = message;
+  container.appendChild(winner);
+}
+
+/* function getUserChoice() {
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      return button.id;
+    });
+  });
+} */
+
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === "rock" && computerSelection === "scissors") {
-    alert("You won! Rock beats scissors");
+    text("You won! Rock beats scissors");
     userScore++;
   } else if (playerSelection === "paper" && computerSelection === "rock") {
-    alert("You won! Paper beats rock");
+    text("You won! Paper beats rock");
     userScore++;
   } else if (playerSelection === "scissors" && computerSelection === "paper") {
-    alert("You won! Scissors beats paper");
+    text("You won! Scissors beats paper");
     userScore++;
   } else if (playerSelection === computerSelection) {
-    alert(`Draw! ${playerSelection} is friends with ${computerSelection}`);
+    text(`Draw! ${playerSelection} is friends with ${computerSelection}`);
   } else if (
     playerSelection !== "rock" &&
     playerSelection !== "paper" &&
     playerSelection !== "scissors"
   ) {
-    alert("You must make a valid choice.");
+    text("You must make a valid choice.");
   } else {
-    alert(`You lost! ${computerSelection} beats ${playerSelection}`);
+    text(`You lost! ${computerSelection} beats ${playerSelection}`);
     computerScore++;
   }
 
-  alert(`You ${userScore} x ${computerScore}`);
+  text(`You ${userScore} x ${computerScore}`);
 }
 
-function playGame() {
-  if (confirm("New game?")) {
-    for (let i = 0; i < 5; i++) {
-      alert(`Round ${i + 1}`);
-      playRound(prompt("Do it").toLowerCase(), getComputerChoice());
-    }
+/* function playGame() {
+  for (let i = 0; i < 5; i++) {
+    resultText(`Round ${i + 1}`);
+    playRound(getUserChoice(), getComputerChoice())
   }
 
-  if (userScore > computerScore) {
-    alert(`You won! Final score: You ${userScore} x ${computerScore} Computer`);
+   if (userScore > computerScore) {
+    resultText(
+      `You won! Final score: You ${userScore} x ${computerScore} Computer`
+    );
     console.log(`You ${userScore} x ${computerScore} Computer`);
   } else if (computerScore > userScore) {
-    alert(
+    resultText(
       `You lost! Final score: You ${userScore} x ${computerScore} Computer`
     );
     console.log(`You ${userScore} x ${computerScore} Computer`);
   } else {
-    alert(`You ${userScore} x ${computerScore} Computer. This is a draw!`);
+    resultText(`You ${userScore} x ${computerScore} Computer. This is a draw!`);
     console.log(`You ${userScore} x ${computerScore} Computer`);
-  }
-}
+  } 
+} */
 
-playGame();
+buttons.forEach((button) => {
+  for (let i = 0; i < 5; i++) {
+    button.addEventListener("click", () => {
+      playRound(button.id, getComputerChoice())
+    });
+  }
+});
