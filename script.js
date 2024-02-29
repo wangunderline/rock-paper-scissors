@@ -19,64 +19,73 @@ const container = document.querySelector("#container");
 const buttons = document.querySelectorAll("button");
 
 let winner = document.createElement("p");
-let result = document.createElement("p");
+let roundsText = document.createElement("p");
+let score = document.createElement("p")
 
-function resultText(message) {
-  result.textContent = message;
-  container.appendChild(result);
+function showRounds(message) {
+  roundsText.textContent = message;
+  container.appendChild(roundsText);
 }
 
-function text(message) {
+function showWinner(message) {
   winner.textContent = message;
   container.appendChild(winner);
 }
 
+function showScore(message) {
+  score.textContent = message;
+  container.appendChild(score);
+}
+
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === "rock" && computerSelection === "scissors") {
-    text("You won! Rock beats scissors");
+    showWinner("You won! Rock beats scissors");
     userScore++;
   } else if (playerSelection === "paper" && computerSelection === "rock") {
-    text("You won! Paper beats rock");
+    showWinner("You won! Paper beats rock");
     userScore++;
   } else if (playerSelection === "scissors" && computerSelection === "paper") {
-    text("You won! Scissors beats paper");
+    showWinner("You won! Scissors beats paper");
     userScore++;
   } else if (playerSelection === computerSelection) {
-    text(`Draw! ${playerSelection} is friends with ${computerSelection}`);
+    showWinner(`Draw! ${playerSelection} is friends with ${computerSelection}`);
   } else if (
     playerSelection !== "rock" &&
     playerSelection !== "paper" &&
     playerSelection !== "scissors"
   ) {
-    text("You must make a valid choice.");
+    showWinner("You must make a valid choice.");
   } else {
-    text(`You lost! ${computerSelection} beats ${playerSelection}`);
+    showWinner(`You lost! ${computerSelection} beats ${playerSelection}`);
     computerScore++;
   }
 
-  text(`You ${userScore} x ${computerScore}`);
+  showScore(`You ${userScore} x ${computerScore}`);
 }
 
-
+let rounds = 1;
 function game() {
-
-
-    buttons.forEach((button) => {
-      button.addEventListener("click", () => {
-        playRound(button.id, getComputerChoice());
-        console.log(button.id, getComputerChoice());
-      });
+  showRounds(`Round ${rounds}`);
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      playRound(button.id, getComputerChoice());
+      console.log(button.id, getComputerChoice());
+      rounds++;
+      showRounds(`Round ${rounds}`);
     });
-
-
+  });
 }
+
+//game()
 
 function playGame() {
 
-for (let i = 0; i < 5; i++) {
-  game()
-  resultText (`Round ${i + 1}`)
-}
+   if (rounds < 5) {
+    game()
+  } else {
+    buttons.remove()
+  } 
+
 
   if (userScore > computerScore) {
     resultText(
