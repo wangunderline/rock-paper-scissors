@@ -31,14 +31,6 @@ function text(message) {
   container.appendChild(winner);
 }
 
-/* function getUserChoice() {
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      return button.id;
-    });
-  });
-} */
-
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === "rock" && computerSelection === "scissors") {
     text("You won! Rock beats scissors");
@@ -65,13 +57,28 @@ function playRound(playerSelection, computerSelection) {
   text(`You ${userScore} x ${computerScore}`);
 }
 
-/* function playGame() {
-  for (let i = 0; i < 5; i++) {
-    resultText(`Round ${i + 1}`);
-    playRound(getUserChoice(), getComputerChoice())
-  }
 
-   if (userScore > computerScore) {
+function game() {
+
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        playRound(button.id, getComputerChoice());
+        console.log(button.id, getComputerChoice());
+      });
+    });
+
+
+}
+
+function playGame() {
+
+for (let i = 0; i < 5; i++) {
+  game()
+  resultText (`Round ${i + 1}`)
+}
+
+  if (userScore > computerScore) {
     resultText(
       `You won! Final score: You ${userScore} x ${computerScore} Computer`
     );
@@ -84,13 +91,7 @@ function playRound(playerSelection, computerSelection) {
   } else {
     resultText(`You ${userScore} x ${computerScore} Computer. This is a draw!`);
     console.log(`You ${userScore} x ${computerScore} Computer`);
-  } 
-} */
-
-buttons.forEach((button) => {
-  for (let i = 0; i < 5; i++) {
-    button.addEventListener("click", () => {
-      playRound(button.id, getComputerChoice())
-    });
   }
-});
+}
+
+playGame();
