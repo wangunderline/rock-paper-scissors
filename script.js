@@ -20,7 +20,8 @@ const buttons = document.querySelectorAll("button");
 
 let winner = document.createElement("p");
 let roundsText = document.createElement("p");
-let score = document.createElement("p")
+let score = document.createElement("p");
+let finalScore = document.createElement("p");
 
 function showRounds(message) {
   roundsText.textContent = message;
@@ -35,6 +36,11 @@ function showWinner(message) {
 function showScore(message) {
   score.textContent = message;
   container.appendChild(score);
+}
+
+function showFinalScore(message) {
+  finalScore.textContent = message;
+  container.appendChild(finalScore);
 }
 
 function playRound(playerSelection, computerSelection) {
@@ -63,44 +69,45 @@ function playRound(playerSelection, computerSelection) {
   showScore(`You ${userScore} x ${computerScore}`);
 }
 
-let rounds = 1;
-function game() {
-  showRounds(`Round ${rounds}`);
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      playRound(button.id, getComputerChoice());
-      console.log(button.id, getComputerChoice());
-      rounds++;
-      showRounds(`Round ${rounds}`);
-    });
-  });
-}
-
-//game()
-
-function playGame() {
-
-   if (rounds < 5) {
-    game()
-  } else {
-    buttons.remove()
-  } 
-
-
+function showResult() {
   if (userScore > computerScore) {
-    resultText(
+    showFinalScore(
       `You won! Final score: You ${userScore} x ${computerScore} Computer`
     );
     console.log(`You ${userScore} x ${computerScore} Computer`);
   } else if (computerScore > userScore) {
-    resultText(
+    showFinalScore(
       `You lost! Final score: You ${userScore} x ${computerScore} Computer`
     );
     console.log(`You ${userScore} x ${computerScore} Computer`);
   } else {
-    resultText(`You ${userScore} x ${computerScore} Computer. This is a draw!`);
+    showFinalScore(
+      `You ${userScore} x ${computerScore} Computer. This is a draw!`
+    );
     console.log(`You ${userScore} x ${computerScore} Computer`);
   }
+}
+
+function playGame() {
+  let rounds = 0;
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      showRounds(`Round ${rounds + 1}`);
+      playRound(button.id, getComputerChoice());
+      console.log(button.id, getComputerChoice());
+      rounds++;
+      
+      if (rounds === 5) {
+        showScore("Game over.");
+        buttons.forEach((button) => {
+          button.remove();
+        });
+        showResult();
+        showRounds("");
+      }
+    });
+  });
 }
 
 playGame();
