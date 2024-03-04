@@ -16,7 +16,8 @@ let userScore = 0;
 let computerScore = 0;
 
 const container = document.querySelector("#container");
-const buttons = document.querySelectorAll("button");
+const buttons = document.querySelectorAll("img");
+const buttonPlay = document.querySelector('button')
 
 let winner = document.createElement("p");
 let roundsText = document.createElement("p");
@@ -91,23 +92,29 @@ function showResult() {
 function playGame() {
   let rounds = 0;
 
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      showRounds(`Round ${rounds + 1}`);
-      playRound(button.id, getComputerChoice());
-      console.log(button.id, getComputerChoice());
-      rounds++;
-      
-      if (rounds === 5) {
-        showScore("Game over.");
-        buttons.forEach((button) => {
-          button.remove();
-        });
-        showResult();
-        showRounds("");
-      }
+  buttonPlay.addEventListener('click', () => {
+    buttonPlay.remove()
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        showRounds(`Round ${rounds + 1}`);
+        playRound(button.id, getComputerChoice());
+        console.log(button.id, getComputerChoice());
+        rounds++;
+        
+        if (rounds === 5) {
+          showScore("Game over.");
+          buttons.forEach((button) => {
+            button.remove();
+          });
+          showResult();
+          showRounds("");
+        }
+      });
     });
-  });
+  })
+
+
 }
 
 playGame();
