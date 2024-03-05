@@ -49,15 +49,19 @@ function showFinalScore(message) {
 
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === "rock" && computerSelection === "scissors") {
+    winner.style.backgroundColor = 'green'
     showWinner("You won! Rock beats scissors");
     userScore++;
   } else if (playerSelection === "paper" && computerSelection === "rock") {
+    winner.style.backgroundColor = 'green'
     showWinner("You won! Paper beats rock");
     userScore++;
   } else if (playerSelection === "scissors" && computerSelection === "paper") {
+    winner.style.backgroundColor = 'green'
     showWinner("You won! Scissors beats paper");
     userScore++;
   } else if (playerSelection === computerSelection) {
+    winner.setAttribute('style', 'color: black; background: white')
     showWinner(`Draw! ${playerSelection} is friends with ${computerSelection}`);
   } else if (
     playerSelection !== "rock" &&
@@ -66,7 +70,9 @@ function playRound(playerSelection, computerSelection) {
   ) {
     showWinner("You must make a valid choice.");
   } else {
+    winner.style.backgroundColor = 'red'
     showWinner(`You lost! ${computerSelection} beats ${playerSelection}`);
+    
     computerScore++;
   }
 
@@ -102,7 +108,6 @@ function playGame() {
       button.addEventListener("click", () => {
         showRounds(`Round ${rounds + 1}`);
         playRound(button.id, getComputerChoice());
-        console.log(button.id, getComputerChoice());
         rounds++;
         
         if (rounds === 5) {
@@ -116,8 +121,6 @@ function playGame() {
       });
     });
   })
-
-
 }
 
 playGame();

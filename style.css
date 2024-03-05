@@ -17,16 +17,21 @@ img {
     height: auto;
     width: 244px;
     cursor: pointer;
-    border: 1px solid white;
-    border-radius: 45%;
+/*     border: 1px solid white;
+    border-radius: 45%; */
     padding: 50px;
+    transition: 0.5s;
+
+    &:hover {
+        filter: drop-shadow(30px 10px 4px blue);
+    }
 }
 
 .button-container {
     height: 10%;
     display: flex;
     width: 100vw;
-    justify-content: space-around;
+    justify-content: center;
     p {
         font-size: 32px;
         background-color: gray;
@@ -47,7 +52,6 @@ img {
     justify-content: center;
     flex-direction: column;
     height: 100vh;
-    border-radius: 8px;
     gap: 62px;
 }
 
@@ -61,10 +65,11 @@ img {
 
 .text-div {
     height: 15%;
-    font-size: larger;
+    font-size: 32px;
     p {
-        background-color: gray;
+        
         font-weight: 700;
         padding: 12px;
+        border-radius: 12px;
     }
 }
