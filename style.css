@@ -1,0 +1,70 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: black;
+    p {
+        color: white;
+    }
+    
+}
+
+img {
+    height: auto;
+    width: 244px;
+    cursor: pointer;
+    border: 1px solid white;
+    border-radius: 45%;
+    padding: 50px;
+}
+
+.button-container {
+    height: 10%;
+    display: flex;
+    width: 100vw;
+    justify-content: space-around;
+    p {
+        font-size: 32px;
+        background-color: gray;
+        padding: 12px;
+        font-weight: 700;
+    }
+
+}
+
+.options {
+    display: flex;
+    gap: 32px;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    border-radius: 8px;
+    gap: 62px;
+}
+
+.play-button{
+    width: 180px;
+    height: 50px;
+    border-radius: 18px;
+    cursor: pointer;
+    font-size: large;
+}
+
+.text-div {
+    height: 15%;
+    font-size: larger;
+    p {
+        background-color: gray;
+        font-weight: 700;
+        padding: 12px;
+    }
+}

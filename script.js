@@ -17,7 +17,10 @@ let computerScore = 0;
 
 const container = document.querySelector("#container");
 const buttons = document.querySelectorAll("img");
-const buttonPlay = document.querySelector('button')
+const playButton = document.querySelector('button')
+const buttonContainer = document.querySelector('#button-container')
+const textDiv = document.querySelector('#text-div')
+playButton.classList.add('play-button')
 
 let winner = document.createElement("p");
 let roundsText = document.createElement("p");
@@ -26,22 +29,22 @@ let finalScore = document.createElement("p");
 
 function showRounds(message) {
   roundsText.textContent = message;
-  container.appendChild(roundsText);
+  buttonContainer.appendChild(roundsText);
 }
 
 function showWinner(message) {
   winner.textContent = message;
-  container.appendChild(winner);
+  textDiv.appendChild(winner);
 }
 
 function showScore(message) {
   score.textContent = message;
-  container.appendChild(score);
+  buttonContainer.appendChild(score);
 }
 
 function showFinalScore(message) {
   finalScore.textContent = message;
-  container.appendChild(finalScore);
+  textDiv.appendChild(finalScore);
 }
 
 function playRound(playerSelection, computerSelection) {
@@ -92,9 +95,9 @@ function showResult() {
 function playGame() {
   let rounds = 0;
 
-  buttonPlay.addEventListener('click', () => {
-    buttonPlay.remove()
-
+  playButton.addEventListener('click', () => {
+    playButton.remove()
+    showRounds(`Round ${rounds + 1}`);
     buttons.forEach((button) => {
       button.addEventListener("click", () => {
         showRounds(`Round ${rounds + 1}`);
