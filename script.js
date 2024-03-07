@@ -12,9 +12,6 @@ function getComputerChoice() {
   return random;
 }
 
-let userScore = 0;
-let computerScore = 0;
-
 const container = document.querySelector("#container");
 const buttons = document.querySelectorAll("img");
 const playButton = document.querySelector("button");
@@ -28,21 +25,22 @@ let score = document.createElement("p");
 let finalScore = document.createElement("p");
 const restartButton = document.createElement("button");
 
+let userScore = 0;
+let computerScore = 0;
+let rounds = 1;
+
 roundsText.classList.add("rounds-text");
 score.classList.add("score-text");
-
-function showRounds(message) {
-  roundsText.textContent = `Round ${message}`;
-  buttonContainer.appendChild(roundsText);
-}
 
 function showWinner(message) {
   winner.textContent = message;
   textDiv.appendChild(winner);
 }
 
-function showScore(message) {
-  score.textContent = message;
+function showScoreAndRounds(message) {
+  roundsText.textContent = `Round ${message}`;
+  score.textContent = `You ${userScore} x ${computerScore} Computer`;
+  buttonContainer.appendChild(roundsText);
   buttonContainer.appendChild(score);
 }
 
@@ -72,7 +70,7 @@ function playRound(playerSelection, computerSelection) {
     showWinner(`You lost! ${computerSelection} beats ${playerSelection}`);
     computerScore++;
   }
-  showScore(`You ${userScore} x ${computerScore} Computer`);
+  showScoreAndRounds(rounds)
 }
 
 function showResult() {
@@ -94,14 +92,12 @@ function showResult() {
   }
 }
 
-let rounds = 0;
+
 
 function restartGame() {
   container.appendChild(playButton);
   playButton.textContent = "Restart game";
   playButton.addEventListener("click", () => {
-    showRounds(rounds - 1);
-    rounds = 0;
     userScore = 0;
     computerScore = 0;
     winner.remove();
@@ -114,12 +110,13 @@ function restartGame() {
 function playGame() {
   playButton.addEventListener("click", () => {
     playButton.remove();
-    const listener = function () {
-      showRounds(rounds + 1);
-      playRound(this.id, getComputerChoice());
-      rounds++;
+    showScoreAndRounds(rounds)
 
-      if (rounds >= 5) {
+    const listener = function () {
+      rounds++
+      playRound(this.id, getComputerChoice());
+
+      if (rounds >= 6) {
         buttons.forEach((button) => {
           button.removeEventListener("click", listener);
           button.classList.remove("hover-class");
@@ -127,6 +124,8 @@ function playGame() {
         });
         showResult();
         restartGame();
+        rounds = 1;
+        showScoreAndRounds(5)
       }
     };
 
