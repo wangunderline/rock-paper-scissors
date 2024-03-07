@@ -47,7 +47,7 @@ function showScore(message) {
 }
 
 function showFinalScore(message) {
-  finalScore.textContent = message
+  finalScore.textContent = message;
   textDiv.appendChild(finalScore);
 }
 
@@ -98,9 +98,9 @@ let rounds = 0;
 
 function restartGame() {
   container.appendChild(playButton);
-  playButton.textContent = "restart";
+  playButton.textContent = "Restart game";
   playButton.addEventListener("click", () => {
-    showRounds(rounds - 1)
+    showRounds(rounds - 1);
     rounds = 0;
     userScore = 0;
     computerScore = 0;
@@ -120,15 +120,21 @@ function playGame() {
       rounds++;
 
       if (rounds >= 5) {
-        buttons.forEach((button) =>
-          button.removeEventListener("click", listener)
-        );
-        showResult()
-        restartGame()
+        buttons.forEach((button) => {
+          button.removeEventListener("click", listener);
+          button.classList.remove("hover-class");
+          button.style.opacity = "0.10";
+        });
+        showResult();
+        restartGame();
       }
     };
 
-    buttons.forEach((button) => button.addEventListener("click", listener));
+    buttons.forEach((button) => {
+      button.addEventListener("click", listener);
+      button.style.opacity = "2";
+      button.classList.add("hover-class");
+    });
   });
 }
 
