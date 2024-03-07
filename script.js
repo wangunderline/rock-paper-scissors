@@ -9,7 +9,7 @@ function getComputerChoice() {
     random = "scissors";
   }
 
-  return random.toLowerCase();
+  return random;
 }
 
 let userScore = 0;
@@ -17,18 +17,22 @@ let computerScore = 0;
 
 const container = document.querySelector("#container");
 const buttons = document.querySelectorAll("img");
-const playButton = document.querySelector('button')
-const buttonContainer = document.querySelector('#button-container')
-const textDiv = document.querySelector('#text-div')
-playButton.classList.add('play-button')
+const playButton = document.querySelector("button");
+const buttonContainer = document.querySelector("#button-container");
+const textDiv = document.querySelector("#text-div");
+playButton.classList.add("play-button");
 
 let winner = document.createElement("p");
 let roundsText = document.createElement("p");
 let score = document.createElement("p");
 let finalScore = document.createElement("p");
+const restartButton = document.createElement("button");
+
+roundsText.classList.add("rounds-text");
+score.classList.add("score-text");
 
 function showRounds(message) {
-  roundsText.textContent = message;
+  roundsText.textContent = `Round ${message}`;
   buttonContainer.appendChild(roundsText);
 }
 
@@ -43,40 +47,32 @@ function showScore(message) {
 }
 
 function showFinalScore(message) {
-  finalScore.textContent = message;
+  finalScore.textContent = message
   textDiv.appendChild(finalScore);
 }
 
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === "rock" && computerSelection === "scissors") {
-    winner.style.backgroundColor = 'green'
+    winner.style.backgroundColor = "green";
     showWinner("You won! Rock beats scissors");
     userScore++;
   } else if (playerSelection === "paper" && computerSelection === "rock") {
-    winner.style.backgroundColor = 'green'
+    winner.style.backgroundColor = "green";
     showWinner("You won! Paper beats rock");
     userScore++;
   } else if (playerSelection === "scissors" && computerSelection === "paper") {
-    winner.style.backgroundColor = 'green'
+    winner.style.backgroundColor = "green";
     showWinner("You won! Scissors beats paper");
     userScore++;
   } else if (playerSelection === computerSelection) {
-    winner.setAttribute('style', 'color: black; background: white')
+    winner.setAttribute("style", "color: black; background: white");
     showWinner(`Draw! ${playerSelection} is friends with ${computerSelection}`);
-  } else if (
-    playerSelection !== "rock" &&
-    playerSelection !== "paper" &&
-    playerSelection !== "scissors"
-  ) {
-    showWinner("You must make a valid choice.");
   } else {
-    winner.style.backgroundColor = 'red'
+    winner.style.backgroundColor = "red";
     showWinner(`You lost! ${computerSelection} beats ${playerSelection}`);
-    
     computerScore++;
   }
-
-  showScore(`You ${userScore} x ${computerScore}`);
+  showScore(`You ${userScore} x ${computerScore} Computer`);
 }
 
 function showResult() {
@@ -98,29 +94,42 @@ function showResult() {
   }
 }
 
-function playGame() {
-  let rounds = 0;
+let rounds = 0;
 
-  playButton.addEventListener('click', () => {
-    playButton.remove()
-    showRounds(`Round ${rounds + 1}`);
-    buttons.forEach((button) => {
-      button.addEventListener("click", () => {
-        showRounds(`Round ${rounds + 1}`);
-        playRound(button.id, getComputerChoice());
-        rounds++;
-        
-        if (rounds === 5) {
-          showScore("Game over.");
-          buttons.forEach((button) => {
-            button.remove();
-          });
-          showResult();
-          showRounds("");
-        }
-      });
-    });
-  })
+function restartGame() {
+  container.appendChild(playButton);
+  playButton.textContent = "restart";
+  playButton.addEventListener("click", () => {
+    showRounds(rounds - 1)
+    rounds = 0;
+    userScore = 0;
+    computerScore = 0;
+    winner.remove();
+    score.remove();
+    finalScore.remove();
+    restartButton.remove();
+  });
+}
+
+function playGame() {
+  playButton.addEventListener("click", () => {
+    playButton.remove();
+    const listener = function () {
+      showRounds(rounds + 1);
+      playRound(this.id, getComputerChoice());
+      rounds++;
+
+      if (rounds >= 5) {
+        buttons.forEach((button) =>
+          button.removeEventListener("click", listener)
+        );
+        showResult()
+        restartGame()
+      }
+    };
+
+    buttons.forEach((button) => button.addEventListener("click", listener));
+  });
 }
 
 playGame();

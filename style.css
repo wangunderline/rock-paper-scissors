@@ -15,15 +15,15 @@ body {
 
 img {
     height: auto;
-    width: 244px;
+    width: 294px;
     cursor: pointer;
 /*     border: 1px solid white;
     border-radius: 45%; */
     padding: 50px;
     transition: 0.5s;
 
-    &:hover {
-        filter: drop-shadow(30px 10px 4px blue);
+    &:hover{
+        filter: drop-shadow(90px 50px 2px white);
     }
 }
 
@@ -32,6 +32,7 @@ img {
     display: flex;
     width: 100vw;
     justify-content: center;
+    
     p {
         font-size: 32px;
         background-color: gray;
@@ -67,9 +68,13 @@ img {
     height: 15%;
     font-size: 32px;
     p {
-        
         font-weight: 700;
         padding: 12px;
         border-radius: 12px;
     }
+}
+
+.rounds-text {
+    color: blue;
+    border-right: 1px solid black;
 }
