@@ -23,6 +23,8 @@ let winner = document.createElement("p");
 let roundsText = document.createElement("p");
 let score = document.createElement("p");
 let finalScore = document.createElement("p");
+let resetDiv = document.createElement("div")
+resetDiv.classList.add("restart-button-div")
 const restartButton = document.createElement("button");
 
 let userScore = 0;
@@ -60,6 +62,7 @@ function playRound(playerSelection, computerSelection) {
     userScore++;
   } else if (playerSelection === "scissors" && computerSelection === "paper") {
     winner.style.backgroundColor = "green";
+    winner.style.color = 'white'
     showWinner("You won! Scissors beats paper");
     userScore++;
   } else if (playerSelection === computerSelection) {
@@ -67,6 +70,7 @@ function playRound(playerSelection, computerSelection) {
     showWinner(`Draw! ${playerSelection} is friends with ${computerSelection}`);
   } else {
     winner.style.backgroundColor = "red";
+    winner.style.color = 'white'
     showWinner(`You lost! ${computerSelection} beats ${playerSelection}`);
     computerScore++;
   }
@@ -76,12 +80,12 @@ function playRound(playerSelection, computerSelection) {
 function showResult() {
   if (userScore > computerScore) {
     showFinalScore(
-      `You won! Final score: You ${userScore} x ${computerScore} Computer`
+      `Final score: You ${userScore} x ${computerScore} Computer`
     );
     console.log(`You ${userScore} x ${computerScore} Computer`);
   } else if (computerScore > userScore) {
     showFinalScore(
-      `You lost! Final score: You ${userScore} x ${computerScore} Computer`
+      `Final score: You ${userScore} x ${computerScore} Computer`
     );
     console.log(`You ${userScore} x ${computerScore} Computer`);
   } else {
@@ -92,10 +96,9 @@ function showResult() {
   }
 }
 
-
-
 function restartGame() {
-  container.appendChild(playButton);
+  textDiv.appendChild(resetDiv);
+  resetDiv.appendChild(playButton)
   playButton.textContent = "Restart game";
   playButton.addEventListener("click", () => {
     userScore = 0;
