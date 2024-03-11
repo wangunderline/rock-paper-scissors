@@ -1,4 +1,4 @@
-function getComputerChoice() {
+function getComputerChoice(what) {
   let random = Math.floor(Math.random() * 3) + 1;
 
   if (random === 1) {
@@ -11,6 +11,21 @@ function getComputerChoice() {
 
   return random;
 }
+
+const rock = document.querySelector('#rock')
+const paper = document.querySelector('#paper')
+const scissors = document.querySelector('#scissors')
+
+/* const forBoth = () => {
+  buttons.forEach((button) => {
+    button.addEventListener("click", function () {
+      button.style.transform = "translate(50%)"
+      if (button === getComputerChoice()){
+        button.style.transform = "translate(60%)"
+      }
+    })
+  })
+} */
 
 const container = document.querySelector("#container");
 const buttons = document.querySelectorAll("img");
@@ -53,7 +68,7 @@ function showFinalScore(message) {
 
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === "rock" && computerSelection === "scissors") {
-    winner.style.backgroundColor = "green";
+    winner.style.backgroundColor = "green"; 
     showWinner("You won! Rock beats scissors");
     userScore++;
   } else if (playerSelection === "paper" && computerSelection === "rock") {
@@ -97,7 +112,7 @@ function showResult() {
 }
 
 function restartGame() {
-  textDiv.appendChild(resetDiv);
+  buttonContainer.appendChild(resetDiv);
   resetDiv.appendChild(playButton)
   playButton.textContent = "Restart game";
   playButton.addEventListener("click", () => {
@@ -133,9 +148,10 @@ function playGame() {
     };
 
     buttons.forEach((button) => {
-      button.addEventListener("click", listener);
+
+      button.addEventListener("click", listener, );
       button.style.opacity = "2";
-      button.classList.add("hover-class");
+      button.classList.add("hover-class");  
     });
   });
 }
