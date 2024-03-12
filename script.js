@@ -12,25 +12,10 @@ function getComputerChoice(what) {
   return random;
 }
 
-const rock = document.querySelector('#rock')
-const paper = document.querySelector('#paper')
-const scissors = document.querySelector('#scissors')
-
-/* const forBoth = () => {
-  buttons.forEach((button) => {
-    button.addEventListener("click", function () {
-      button.style.transform = "translate(50%)"
-      if (button === getComputerChoice()){
-        button.style.transform = "translate(60%)"
-      }
-    })
-  })
-} */
-
 const container = document.querySelector("#container");
 const buttons = document.querySelectorAll("img");
 const playButton = document.querySelector("button");
-const buttonContainer = document.querySelector("#button-container");
+const topContainer = document.querySelector("#button-container");
 const textDiv = document.querySelector("#text-div");
 playButton.classList.add("play-button");
 
@@ -57,8 +42,8 @@ function showWinner(message) {
 function showScoreAndRounds(message) {
   roundsText.textContent = `Round ${message}`;
   score.textContent = `You ${userScore} x ${computerScore} Computer`;
-  buttonContainer.appendChild(roundsText);
-  buttonContainer.appendChild(score);
+  topContainer.appendChild(roundsText);
+  topContainer.appendChild(score);
 }
 
 function showFinalScore(message) {
@@ -112,7 +97,7 @@ function showResult() {
 }
 
 function restartGame() {
-  buttonContainer.appendChild(resetDiv);
+  topContainer.appendChild(resetDiv);
   resetDiv.appendChild(playButton)
   playButton.textContent = "Restart game";
   playButton.addEventListener("click", () => {
@@ -125,18 +110,19 @@ function restartGame() {
   });
 }
 
+
 function playGame() {
   playButton.addEventListener("click", () => {
     playButton.remove();
     showScoreAndRounds(rounds)
 
-    const listener = function () {
+    const startGame = function () {
       rounds++
       playRound(this.id, getComputerChoice());
 
       if (rounds >= 6) {
         buttons.forEach((button) => {
-          button.removeEventListener("click", listener);
+          button.removeEventListener("click", startGame);
           button.classList.remove("hover-class");
           button.style.opacity = "0.10";
         });
@@ -148,8 +134,7 @@ function playGame() {
     };
 
     buttons.forEach((button) => {
-
-      button.addEventListener("click", listener, );
+      button.addEventListener("click", startGame);
       button.style.opacity = "2";
       button.classList.add("hover-class");  
     });
