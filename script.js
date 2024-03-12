@@ -82,17 +82,14 @@ function showResult() {
     showFinalScore(
       `Final score: You ${userScore} x ${computerScore} Computer`
     );
-    console.log(`You ${userScore} x ${computerScore} Computer`);
   } else if (computerScore > userScore) {
     showFinalScore(
       `Final score: You ${userScore} x ${computerScore} Computer`
     );
-    console.log(`You ${userScore} x ${computerScore} Computer`);
   } else {
     showFinalScore(
       `You ${userScore} x ${computerScore} Computer. This is a draw!`
     );
-    console.log(`You ${userScore} x ${computerScore} Computer`);
   }
 }
 
