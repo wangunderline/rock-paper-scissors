@@ -1,4 +1,4 @@
-function getComputerChoice(what) {
+function getComputerChoice() {
   let random = Math.floor(Math.random() * 3) + 1;
 
   if (random === 1) {
@@ -15,7 +15,7 @@ function getComputerChoice(what) {
 const container = document.querySelector("#container");
 const buttons = document.querySelectorAll("img");
 const playButton = document.querySelector("button");
-const topContainer = document.querySelector("#button-container");
+const topContainer = document.querySelector("#top-container");
 const textDiv = document.querySelector("#text-div");
 playButton.classList.add("play-button");
 
@@ -109,7 +109,6 @@ function restartGame() {
     restartButton.remove();
   });
 }
-
 
 function playGame() {
   playButton.addEventListener("click", () => {
