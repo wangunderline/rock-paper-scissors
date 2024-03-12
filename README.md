@@ -1,3 +1,3 @@
 # rock-paper-scissors
 
-This is a simple Rock Paper Scissors game made with functions and nested if/elses in JavaScript.
+This simple rock-paper-scissors game was built using DOM manipulation to create an interactive user interface (UI). The game repeats for five rounds and stops afterward, providing a restart button for another game session.
