@@ -19,7 +19,7 @@ img {
     cursor: pointer;
     padding: 50px;
     transition: 0.5s;
-    filter: drop-shadow(15px 10px 7px rgb(180, 176, 176));
+    filter: drop-shadow(15px 10px 7px black);
 }
 
 @keyframes horizontal-shaking {
@@ -32,7 +32,7 @@ img {
 
 .hover-class {
     &:hover {
-        filter: drop-shadow(10px 10px 7px white);
+        filter: drop-shadow(10px 10px 7px black);
         animation: horizontal-shaking 0.2s;
         animation-iteration-count: infinite;
     }
@@ -54,12 +54,13 @@ img {
 .options {
     display: flex;
     gap: 32px;
-    border: 8px solid white;
-
+    background: rgb(2,5,75);
+    background: linear-gradient(90deg, rgba(2,5,75,1) 30%, rgba(222,43,43,1) 100%);
 }
 
 .border {
-    border: 8px solid #f4f24f;
+/*     border: 8px solid #f4f24f;
+    border-radius: 18px; */
 }
 
 .container {
@@ -72,10 +73,14 @@ img {
 }
 
 .play-button{
-
     cursor: pointer;
+    padding: 10px;
     font-size: large;
-    background-color: #f4f24f;
+    background-color: rgb(2,5,75);
+    color: white;
+    font-weight: 500;
+    text-shadow: 1px 1px 2px black;
+    border: none;
 }
 
 .text-div {
